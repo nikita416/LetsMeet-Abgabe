@@ -88,3 +88,56 @@
 - Zehn Personen besitzen in der Excel-Quelle keine Hobby-Angaben.
 - Der Import prüft die technische Struktur und die vereinbarten Transformationsregeln, bewertet aber noch nicht die fachliche Richtigkeit aller personenbezogenen Angaben.
 
+## 31.08.2026 – Analyse von Interessen und Hobbys
+
+### Interessen
+
+- In der Excel-Quelle kommen die Werte `m`, `w` und `mw` vor.
+- `mw` wird als zwei einzelne Interessencodes `m` und `w` interpretiert.
+- Dadurch entstehen 1609 Zuordnungen zwischen Personen und Interessencodes.
+- Es gibt keine doppelten Kombinationen aus E-Mail-Adresse und Interessencode.
+- Die Codes werden unverändert gespeichert und nicht in Bezeichnungen übersetzt.
+- Für die Interessencodes wird gemäß Datenvertrag keine eigene Übersetzungstabelle angelegt.
+
+### Hobbys
+
+- Aus der Excel-Quelle wurden 4828 Hobbyzuordnungen ermittelt.
+- Insgesamt kommen 220 unterschiedliche Hobbybezeichnungen vor.
+- Alle Hobbyangaben konnten nach dem Muster `Bezeichnung %Priorität%` gelesen werden.
+- Es wurden keine doppelten Kombinationen aus E-Mail-Adresse, Hobby und Quelle gefunden.
+- Zehn Personen besitzen keine Hobbyangaben.
+- Die aktuelle Lieferung enthält Prioritäten von 0 bis 100.
+- Das Zielmodell erlaubt trotzdem den fachlich vereinbarten Bereich von -100 bis 100.
+- Für Akt 2 wird bei jeder Hobbyzuordnung `source = 'excel'` gespeichert.
+
+## 31.08.2026 – Kundinnenentscheidung zu Quellenkonflikten
+
+- Die Kundinnenentscheidung wurde bei der Lehrkraft eingeholt.
+- Bei widersprüchlichen Namen und Telefonnummern hat MongoDB Vorrang.
+- Die E-Mail-Schreibweise wird gemäß Datenvertrag weiterhin aus Excel übernommen.
+- Die Zuordnung der Profile erfolgt ohne Beachtung der Groß- und Kleinschreibung.
+- Namen aus MongoDB werden nach derselben Regel wie in Akt 1 mit `Komma + genau ein Leerzeichen` getrennt.
+- Nicht widersprüchliche Excel-Felder wie Geburtsdatum, Postleitzahl, Ort, Geschlecht, Interessen und Hobbys bleiben aus der Excel-Quelle erhalten.
+
+## 31.08.2026 – Abschluss Akt 2
+
+### Ergebnis
+
+- Der gemeinsame Neuaufbau aus Excel und MongoDB wurde nach dem Leeren der PostgreSQL-Datenbank erfolgreich ausgeführt.
+- Der offizielle Prüfbefehl `letsmeet check V2` endete mit `GATE GRÜN`.
+- Alle fünf Vertrags-Views besitzen die geforderten Spalten und Datentypen.
+- 1576 Personen wurden vollständig übernommen.
+- 1609 Interessenangaben wurden übernommen; Mehrfachangaben wurden in einzelne Zeilen aufgelöst.
+- 4828 Hobbyzuordnungen wurden einschließlich Prioritäten und Quelle übernommen.
+- 500 gerichtete Likes wurden mit Status und Zeitpunkt übernommen.
+- 300 gerichtete Nachrichten wurden mit Absender, Empfänger, Zeitpunkt und Conversation-ID übernommen.
+- Bei Quellenkonflikten wurde gemäß Kundinnenentscheidung MongoDB priorisiert.
+- Die Schreibweise der E-Mail-Adresse stammt weiterhin aus Excel.
+
+### Weitere Befunde
+
+- Es gibt 50 verschiedene `conversation_id`.
+- 48 Conversation-IDs kommen bei mehr als einem Teilnehmerpaar vor.
+- Die Conversation-ID kann deshalb nicht ohne weitere fachliche Klärung als eindeutiger Schlüssel eines Teilnehmerpaares interpretiert werden.
+- Für `birgit.voss@gmaiil.ork` enthält MongoDB den Telefonwert `0`.
+- Dieser Wert besitzt keinen erkennbaren Informationsgehalt, wurde aber gemäß Kundinnenentscheidung und ohne stillschweigende Korrektur übernommen.

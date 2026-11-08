@@ -141,3 +141,36 @@
 - Die Conversation-ID kann deshalb nicht ohne weitere fachliche Klärung als eindeutiger Schlüssel eines Teilnehmerpaares interpretiert werden.
 - Für `birgit.voss@gmaiil.ork` enthält MongoDB den Telefonwert `0`.
 - Dieser Wert besitzt keinen erkennbaren Informationsgehalt, wurde aber gemäß Kundinnenentscheidung und ohne stillschweigende Korrektur übernommen.
+## 14.09.2026 – Abschluss Akt 3
+
+### XML-Basislieferung
+
+- Die Datei `Lets_Meet_Hobbies.xml` enthält 100 Personen und 300 Hobbyzuordnungen.
+- Alle in der XML-Datei genannten Personen konnten den vorhandenen Personen anhand der E-Mail-Adresse zugeordnet werden.
+- Zwischen den 300 XML-Hobbyzuordnungen und den Excel-Hobbyzuordnungen bestanden keine fachlichen Duplikate.
+- Alle 300 Zuordnungen wurden mit `source = 'xml'` und `priority = NULL` übernommen.
+- Nach dem Basisimport bestanden insgesamt 5128 Hobbyzuordnungen.
+
+### Änderungspaket
+
+- Das unveränderte Archiv `letsmeet-transfer-v3.zip` wurde mit SHA-256 geprüft.
+- Die Prüfsumme stimmt mit dem vorgegebenen Wert `5370a041066db2c8d76bba1ab95e79b33be984a2d92d73b5ad409a02d8bd1385` überein.
+- Das Änderungspaket enthält acht physische Datensätze.
+- Eine zusätzliche gültige Hobbyzuordnung wurde übernommen.
+- Das Profil `transfer.mojibake@letsmeet.invalid` wurde nach nachvollziehbarer Korrektur des Mojibake-Textes übernommen. Dabei wurde `MÃ¼ller` zu `Müller` korrigiert.
+- Das Profil `transfer.p2@letsmeet.invalid` wurde wegen des nicht zulässigen wörtlichen Fehlwerts `unbekannt` im Feld `city` abgelehnt.
+- Ein Like mit unbekannter Zielperson wurde abgelehnt.
+- Eine bereits vorhandene Hobbyzuordnung wurde nicht dupliziert und als Ablehnung dokumentiert.
+- Eine Hobbyzuordnung mit der Priorität 101 wurde wegen Überschreitung des vereinbarten Wertebereichs von -100 bis 100 abgelehnt.
+- Eine doppelte Hobbyzuordnung innerhalb des Änderungspakets wurde einmal übernommen und einmal als Duplikat abgelehnt.
+- Das Profil aus `encoding-invalid.xml` wurde abgelehnt, weil die Datei entgegen ihrer UTF-8-Deklaration nicht als gültiges UTF-8 gelesen werden kann.
+- Insgesamt wurden sechs Ablehnungen eindeutig über `source` und `source_ref` dokumentiert.
+
+### Abnahme und Idempotenz
+
+- Nach dem Änderungspaket enthält der Bestand 1577 Personen, 1609 Interessen, 5129 Hobbyzuordnungen, 500 Likes und 300 Nachrichten.
+- Alle sechs Vertrags-Views entsprechen dem Datenvertrag V3.
+- Nach dem ersten Import wurde ein offizieller Vergleichszustand gespeichert.
+- Derselbe Import des Änderungspakets wurde anschließend ein zweites Mal ausgeführt.
+- Alle sechs Vertrags-Views blieben nach dem zweiten Import mengen- und wertgleich.
+- Der offizielle Snapshotvergleich endete mit `GATE GRÜN`.
